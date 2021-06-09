@@ -2,22 +2,25 @@
 
 class MY_Form_validation extends CI_Form_validation {
 
-	function __construct($rules = array())
+  protected $CI;
+
+	function __construct($config = array())
 	{
-	  $this->CI =& get_instance();
-    parent::__construct($rules);
+    parent::__construct($config);
+    $this->_CI =& get_instance(); 
+    $this->_config_rules = $config;
 	}
 
   function validate_format_cpf($cpf)
   {
-    $this->CI->form_validation->set_message('validate_format_cpf', 'O formato de %s informado não é válido.');
+    $this->_CI->form_validation->set_message('validate_format_cpf', 'O formato de %s não é válido.');
 
     return preg_match('/^\d{3}\.\d{3}\.\d{3}-\d{2}$/', $cpf) > 0;
   }
 
   function validate_cpf($cpf)
   {
-    $this->CI->form_validation->set_message('validate_cpf', 'O campo %s não contém um CPF válido.');
+    $this->_CI->form_validation->set_message('validate_cpf', 'O %s informado não é válido.');
 
     $cpf = $this->sanitize($cpf);
 
@@ -42,19 +45,33 @@ class MY_Form_validation extends CI_Form_validation {
 
   function validate_cns($cns)
   {
-    $this->CI->form_validation->set_message('validate_cns', 'O campo %s não contém um CNS válido.');
+    $this->_CI->form_validation->set_message('validate_cns', 'O %s informado não é válido.');
 
     $cns = $this->sanitize($cns);
 
     // CNSs definitivos começam em 1 ou 2 / CNSs provisórios em 7, 8 ou 9
     if (preg_match("/[1-2][0-9]{10}00[0-1][0-9]/", $cns) || preg_match("/[7-9][0-9]{14}/", $cns)) {
-      return $this->somaPonderadaCns($cns) % 11 == 0;
+      return $this->weighted_sum_cns($cns) % 11 == 0;
     }
 
     return false;
   }
 
-  private function somaPonderadaCns($value): int
+  function validate_format_cep($cep)
+  {
+    $this->_CI->form_validation->set_message('validate_format_cep', 'O formato de %s não é válido.');
+
+    return preg_match('/^\d{5}\-\d{3}$/', $cep) > 0;
+  }
+
+  function validate_full_name($name)
+  {
+    $this->_CI->form_validation->set_message('validate_full_name', 'O %s informado não contém sobrenome.');
+
+    return count(explode(" ", $name)) > 1;
+  }
+
+  private function weighted_sum_cns($value)
   {
     $soma = 0;
 

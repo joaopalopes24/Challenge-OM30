@@ -15,8 +15,12 @@
 
 <!-- REQUIRED SCRIPTS -->
 
+<!-- jQuery -->
+<script src="<?php echo base_url('assets/jquery/jquery.min.js') ?>"></script>
 <!-- Bootstrap -->
 <script src="<?php echo base_url('assets/bootstrap/js/bootstrap.bundle.min.js') ?>"></script>
+<!-- Esse Script com integração do ViaCEP foi pegado na própria documentação do ViaCEP com pequenas alterações -->
+<script src="<?php echo base_url('assets/dist/js/viacep.js') ?>"></script>
 
 <script>
   // JavaScript code to disable form submission if there are invalid fields

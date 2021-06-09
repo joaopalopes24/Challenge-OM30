@@ -15,7 +15,15 @@
   <div class="container">
   <div class="row">
     <div class="col-md-12 mb-3">
-      <h4 class="mb-2">Adicionar Paciente</h4>
+      <h4 class="mb-2 my-2">Adicionar Paciente</h4>
+      <?php if(validation_errors()){ ?>
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+          <?php echo validation_errors('<h20>', '</h20> / '); ?>
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">x</span>
+          </button>
+        </div>
+      <?php } ?>
       <form class="needs-validation" action="#" method="post" novalidate>
         <div class="row">
           <div class="col-md-5 mb-1">
@@ -47,7 +55,7 @@
           </div>
           <div class="col-md-4 mb-1">
             <label for="cep">CEP</label>
-            <input type="text" class="form-control" id="cep" name="cep" placeholder="SOMENTE NÚMEROS" required>
+            <input type="text" class="form-control" id="cep" name="cep" placeholder="SOMENTE NÚMEROS" onblur="pesquisacep(this.value);" required>
             <?php echo feedback() ?>
           </div>
         </div>
@@ -64,7 +72,7 @@
           </div>
           <div class="col-md-4 mb-1">
             <label for="complement">Complemento</label>
-            <input type="text" class="form-control" id="complement" name="complement" placeholder="Complemento" value="">
+            <input type="text" class="form-control" id="complement" name="complement" placeholder="Complemento">
             <?php echo feedback(false) ?>
           </div>
         </div>

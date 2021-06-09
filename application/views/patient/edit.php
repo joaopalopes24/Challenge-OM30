@@ -15,7 +15,7 @@
   <div class="container">
   <div class="row">
     <div class="col-md-12 mb-3">
-      <h4 class="mb-2">Editar Paciente</h4>
+      <h4 class="mb-2 my-2">Editar Paciente</h4>
       <form class="needs-validation" action="#" method="post" novalidate>
         <div class="row">
           <div class="col-md-5 mb-1">
