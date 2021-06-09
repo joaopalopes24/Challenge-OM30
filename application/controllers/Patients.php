@@ -8,7 +8,7 @@ class Patients extends CI_Controller {
   function __construct() {
     // Call the Controller constructor
     parent::__construct();
-    $this->load->model('pacientes_model', 'pacientes');
+    //$this->load->model('pacientes_model', 'pacientes');
   }
 
   function index() {
@@ -23,9 +23,9 @@ class Patients extends CI_Controller {
 
   }
 
-  function update() {
+  function edit() {
 
-    template('patient/update');
+    template('patient/edit');
 
   }
 

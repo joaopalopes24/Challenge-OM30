@@ -1,6 +1,10 @@
-<footer class="main-footer">
-    <strong>Copyright &copy; {{ date('Y') }} - 
-    <a href="https://gitlab.com/joaopalopes24/challenge-om30" target="_blank">
+  <footer class="main-footer">
+    <?php
+      date_default_timezone_set('America/Sao_Paulo');
+      $date = date('Y');
+    ?>
+    <strong>Copyright &copy; <?php echo "$date" ?> - 
+    <a href="https://github.com/joaopalopes24/Desafio-OM30" target="_blank">
       João Pedro Lopes.
     </a></strong> 
     Todos os direitos reservados.
@@ -13,17 +17,17 @@
 <!-- REQUIRED SCRIPTS -->
 
 <!-- jQuery -->
-<script src="{{asset('plugins/jquery/jquery.min.js')}}"></script>
+<script src="<?php echo base_url() ?>assets/jquery/jquery.min.js"></script>
 <!-- Bootstrap -->
-<script src="{{asset('plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+<script src="<?php echo base_url() ?>assets/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- SweetAlert2 -->
-<script src="{{asset('plugins/toastr/sweetalert2.min.js')}}"></script>
+<script src="<?php echo base_url() ?>assets/toastr/sweetalert2.min.js"></script>
 <!-- Toastr -->
-<script src="{{asset('plugins/toastr/toastr.min.js')}}"></script>
+<script src="<?php echo base_url() ?>assets/toastr/toastr.min.js"></script>
 <!-- AdminLTE -->
-<script src="{{asset('plugins/dist/js/adminlte.min.js')}}"></script>
+<script src="<?php echo base_url() ?>assets/dist/js/adminlte.min.js"></script>
 <!-- Stylesheets -->
-<script src="{{asset('plugins/dist/js/locastyle.js')}}"></script>
+<script src="<?php echo base_url() ?>assets/dist/js/locastyle.js"></script>
 
 <script>
   // JavaScript code to disable form submission if there are invalid fields
