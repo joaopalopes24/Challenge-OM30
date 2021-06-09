@@ -7,11 +7,11 @@ function template($conteudo, $dados = NULL) {
 
     $CI = &get_instance();
 
-    $CI->load->view('default/header', $dados);
+    $CI->load->view('layout/header', $dados);
 
-    $CI->load->view($conteudo);
+    $CI->load->view($conteudo, $dados);
 
-    $CI->load->view('default/footer');
+    $CI->load->view('layout/footer');
 }
 
 // Dentro do Banco de Dados temos campos do tipo DATE e TIMESTAMP.
