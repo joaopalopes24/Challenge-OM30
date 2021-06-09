@@ -30,7 +30,7 @@ class Patients extends CI_Controller {
   }
 
   function delete() {
-
+    return "Deleatado com Sucesso";
   }
 
 }
