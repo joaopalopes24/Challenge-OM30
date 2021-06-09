@@ -7,7 +7,7 @@
     <div class="collapse navbar-collapse" id="navbarCollapse">
       <ul class="navbar-nav mr-auto">
       </ul>
-      <a href="<?php echo base_url('patients') ?>" class="btn btn-outline-success my-2 my-sm-0" type="submit">Listar Pacientes</a>
+      <a href="<?php echo base_url('patients') ?>" class="btn btn-outline-primary my-2 my-sm-0" type="submit"><i class="fas fa-plus"></i> Adicionar Foto</a>
     </div>
   </nav>
 </header>
@@ -24,7 +24,7 @@
           </button>
         </div>
       <?php } ?>
-      <form class="needs-validation" action="#" method="post" novalidate>
+      <form class="needs-validation" action="<?php echo base_url('patients/create') ?>" method="post" novalidate>
         <div class="row">
           <div class="col-md-5 mb-1">
             <label for="full_name">Nome Completo</label>
@@ -98,10 +98,10 @@
         <hr class="mb-2">
         <div class="row">
           <div class="col-sm-6">
-            <a href="<?php echo base_url() ?>" class="btn btn-secondary btn-block" type="submit">Voltar</a>
+            <a href="<?php echo base_url() ?>" class="btn btn-outline-secondary btn-block" type="submit">Voltar</a>
           </div>
           <div class="col-sm-6">
-            <button class="btn btn-success btn-block" type="submit">Salvar</button>
+            <button class="btn btn-outline-success btn-block" type="submit">Salvar</button>
           </div>
         </div>
       </form>

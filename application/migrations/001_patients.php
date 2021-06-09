@@ -31,10 +31,12 @@ class Migration_patients extends CI_Migration {
       'cpf' => array(
         'type' => 'VARCHAR',
         'constraint' => '14',
+        'unique' => TRUE
       ),
       'cns' => array(
         'type' => 'VARCHAR',
         'constraint' => '15',
+        'unique' => TRUE
       ),
       'cep' => array(
         'type' => 'VARCHAR',

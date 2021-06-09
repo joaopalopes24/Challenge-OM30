@@ -11,6 +11,27 @@ class MY_Form_validation extends CI_Form_validation {
     $this->_config_rules = $config;
 	}
 
+  function unique($value,$string)
+  {
+    $this->_CI->form_validation->set_message('unique', 'O valor do campo %s já existe.');
+
+    $id = $this->CI->input->post('id');
+
+    sscanf($string, '%[^.].%[^.]', $table, $field);
+
+    $attribute = $this->CI->db->limit(1)->get_where($table, array($field => $value))->num_rows();
+
+    if($attribute == 0) return true;
+
+    if($id == NULL) return false;
+
+    $attribute = $this->CI->db->limit(1)->get_where($table, array($id => $id))->result('array');
+
+    if($value == $attribute[0][$field]) return true;
+
+    return false;
+  }
+
   function validate_format_cpf($cpf)
   {
     $this->_CI->form_validation->set_message('validate_format_cpf', 'O formato de %s não é válido.');

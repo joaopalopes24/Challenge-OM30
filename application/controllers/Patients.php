@@ -9,50 +9,70 @@ class Patients extends CI_Controller {
     // Call the Controller constructor
     parent::__construct();
     $this->load->library('form_validation');
-    //$this->load->model('pacientes_model', 'pacientes');
+    $this->load->model('patients_model', 'patients');
   }
 
   function index() {
 
-    template('patient/index');
+    $values['patients'] = $this->patients->read()->result();
+
+    template('patient/index', $values);
 
   }
 
   function create() {
 
-    if ($this->form_validation->run('patient') == FALSE) {
+    if (!$this->form_validation->run('patient')) {
 
-        template('patient/create');
+      template('patient/create');
 
     } else {
 
-      $dados = array(
-        'full_name' => $this->input->post('full_name'),
-        'mother_name' => $this->input->post('mother_name'),
-        'birthday' => $this->input->post('birthday'),
-        'cpf' => $this->input->post('cpf'),
-        'cns' => $this->input->post('cns'),
-        'cep' => $this->input->post('cep'),
-        'adress' => $this->input->post('adress'),
-        'number' => $this->input->post('number'),
-        'complement' => $this->input->post('complement'),
-        'district' => $this->input->post('district'),
-        'city' => $this->input->post('city'),
-        'state_abbr' => $this->input->post('state_abbr'),
-      );
+      $values = $this->input->post();
+      $values['created_at'] = getData();
 
-      var_dump($dados);
+      $this->patients->create($values);
+
+      redirect("patients");
     }
   }
 
   function edit() {
 
-    template('patient/edit');
+    $id = $this->uri->segment(3);
 
+    if (!$this->form_validation->run('patient')) {
+
+      $values['patient'] = $this->patients->read($id)->row();
+
+      template('patient/edit', $values);
+
+    } else {
+
+      $values = $this->input->post();
+      $values['updated_at'] = getData();
+
+      $this->patients->update($values);
+
+      redirect("patients");
+    }
   }
 
   function delete() {
-    return "Deleatado com Sucesso";
+    
+    if (!$this->form_validation->run('delete')) {
+
+      redirect("patients");
+
+    } else {
+
+      $id = $this->input->post('id');
+      $values['deleted_at'] = getData();
+
+      $this->patients->delete($id,$values);
+
+      redirect("patients");
+    }
   }
 
 }

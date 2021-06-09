@@ -4,7 +4,17 @@
     /**
      * Validação do Paciente
      */
+
+    'delete' => array(
+      array('field' => 'id',
+        'label' => 'ID',
+        'rules' => 'trim|is_natural_no_zero'),
+    ),
+
     'patient' => array(
+      array('field' => 'id',
+        'label' => 'ID',
+        'rules' => 'trim|is_natural_no_zero'),
       /*array('field' => 'photo',
         'label' => 'Foto',
         'rules' => 'required'),*/
@@ -19,10 +29,10 @@
         'rules' => 'required|trim'),
       array('field' => 'cpf',
         'label' => 'CPF',
-        'rules' => 'required|trim|exact_length[14]|validate_cpf|validate_format_cpf'),
+        'rules' => 'required|trim|exact_length[14]|validate_cpf|validate_format_cpf|unique[patients.cpf]'),
       array('field' => 'cns',
         'label' => 'CNS',
-        'rules' => 'required|trim|exact_length[15]|validate_cns'),
+        'rules' => 'required|trim|exact_length[15]|validate_cns|unique[patients.cns]'),
       array('field' => 'cep',
         'label' => 'CEP',
         'rules' => 'required|trim|exact_length[9]|validate_format_cep'),
