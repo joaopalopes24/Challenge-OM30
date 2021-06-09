@@ -21,6 +21,10 @@ class Migration_patients extends CI_Migration {
         'type' => 'VARCHAR',
         'constraint' => '255',
       ),
+      'mother_name' => array(
+        'type' => 'VARCHAR',
+        'constraint' => '255',
+      ),
       'birthday' => array(
         'type' => 'DATE',
       ),
