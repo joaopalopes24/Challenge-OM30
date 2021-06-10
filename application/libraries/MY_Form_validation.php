@@ -4,14 +4,14 @@ class MY_Form_validation extends CI_Form_validation {
 
   protected $CI;
 
-	function __construct($config = array())
+	public function __construct($config = array())
 	{
     parent::__construct($config);
     $this->_CI =& get_instance(); 
     $this->_config_rules = $config;
 	}
 
-  function unique($value,$string)
+  public function unique($value,$string)
   {
     $this->_CI->form_validation->set_message('unique', 'O valor do campo %s já existe.');
 
@@ -25,21 +25,21 @@ class MY_Form_validation extends CI_Form_validation {
 
     if($id == NULL) return false;
 
-    $attribute = $this->CI->db->limit(1)->get_where($table, array($id => $id))->result('array');
+    $attribute = $this->CI->db->limit(1)->get_where($table, array('id' => $id))->result('array');
 
     if($value == $attribute[0][$field]) return true;
 
     return false;
   }
 
-  function validate_format_cpf($cpf)
+  public function validate_format_cpf($cpf)
   {
     $this->_CI->form_validation->set_message('validate_format_cpf', 'O formato de %s não é válido.');
 
     return preg_match('/^\d{3}\.\d{3}\.\d{3}-\d{2}$/', $cpf) > 0;
   }
 
-  function validate_cpf($cpf)
+  public function validate_cpf($cpf)
   {
     $this->_CI->form_validation->set_message('validate_cpf', 'O %s informado não é válido.');
 
@@ -64,7 +64,14 @@ class MY_Form_validation extends CI_Form_validation {
     return true;
   }
 
-  function validate_cns($cns)
+  public function validate_format_cns($cns)
+  {
+    $this->_CI->form_validation->set_message('validate_format_cns', 'O formato de %s não é válido.');
+
+    return preg_match('/^\d{3}\ \d{4}\ \d{4}\ \d{4}$/', $cns) > 0;
+  }
+
+  public function validate_cns($cns)
   {
     $this->_CI->form_validation->set_message('validate_cns', 'O %s informado não é válido.');
 
@@ -78,14 +85,14 @@ class MY_Form_validation extends CI_Form_validation {
     return false;
   }
 
-  function validate_format_cep($cep)
+  public function validate_format_cep($cep)
   {
     $this->_CI->form_validation->set_message('validate_format_cep', 'O formato de %s não é válido.');
 
-    return preg_match('/^\d{5}\-\d{3}$/', $cep) > 0;
+    return preg_match('/^\d{5}-\d{3}$/', $cep) > 0;
   }
 
-  function validate_full_name($name)
+  public function validate_full_name($name)
   {
     $this->_CI->form_validation->set_message('validate_full_name', 'O %s informado não contém sobrenome.');
 

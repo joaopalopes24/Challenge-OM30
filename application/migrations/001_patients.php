@@ -10,20 +10,17 @@ class Migration_patients extends CI_Migration {
         'type' => 'INT',
           'constraint' => 11,
           'unsigned' => TRUE,
-          'auto_increment' => TRUE
+          'auto_increment' => TRUE,
       ),
       'photo' => array(
         'type' => 'VARCHAR',
-        'constraint' => '255',
         'null' => TRUE,
       ),
       'full_name' => array(
         'type' => 'VARCHAR',
-        'constraint' => '255',
       ),
       'mother_name' => array(
         'type' => 'VARCHAR',
-        'constraint' => '255',
       ),
       'birthday' => array(
         'type' => 'DATE',
@@ -35,34 +32,34 @@ class Migration_patients extends CI_Migration {
       ),
       'cns' => array(
         'type' => 'VARCHAR',
-        'constraint' => '15',
+        'constraint' => '18',
         'unique' => TRUE
       ),
       'cep' => array(
         'type' => 'VARCHAR',
         'constraint' => '9',
       ),
-      'adress' => array(
+      'address' => array(
         'type' => 'VARCHAR',
-        'constraint' => '50',
       ),
       'number' => array(
         'type' => 'INT',
-        'constraint' => '5',
+        'constraint' => '11',
         'unsigned' => TRUE,
       ),
       'complement' => array(
         'type' => 'VARCHAR',
-        'constraint' => '30',
+        'null' => TRUE,
+      ),
+      'localization' => array(
+        'type' => 'VARCHAR',
         'null' => TRUE,
       ),
       'district' => array(
         'type' => 'VARCHAR',
-        'constraint' => '40',
       ),
       'city' => array(
         'type' => 'VARCHAR',
-        'constraint' => '40',
       ),
       'state_abbr' => array(
         'type' => 'VARCHAR',

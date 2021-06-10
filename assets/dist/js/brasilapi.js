@@ -39,7 +39,7 @@ function pesquisacep(valor) {
           //Cria um elemento javascript.
           var script = document.createElement('script');
           //Sincroniza com o callback.
-          script.src = 'https://viacep.com.br/ws/' + cep + '/json/?callback=meu_callback';
+          script.src = 'https://brasilapi.com.br/api/cep/v2/' + cep;
           //Insere script no documento e carrega o conteúdo.
           document.body.appendChild(script);
       } //end if.
