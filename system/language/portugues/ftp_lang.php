@@ -9,15 +9,15 @@
  */
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-$lang['ftp_no_connection'] = 'Não foi possível localizar um ID de conexão válido. Por favor tenha certeza que você está conectado antes de executar qualquer arquivo de rotina.';
-$lang['ftp_unable_to_connect'] = 'Não foi possível conectar ao seu servidor FTP usando o endereço fornecido.';
-$lang['ftp_unable_to_login'] = 'Não foi possível fazer login em seu servidor FTP. Por favor verifique seu usuário e senha.';
-$lang['ftp_unable_to_mkdir'] = 'Não foi possível criar o diretório que você especificou.';
-$lang['ftp_unable_to_changedir'] = 'Não foi possível mundar diretórios.';
-$lang['ftp_unable_to_chmod'] = 'Não foi possível configurar permissões de arquivo. Por favor verifique o seu caminho.';
-$lang['ftp_unable_to_upload'] = 'Não foi possível fazer upload do arquivo especificado. Por favor verifique seu caminho.';
-$lang['ftp_unable_to_download'] = 'Não foi possível fazer download do arquivo especificado. Por favor verifique seu caminho.';
-$lang['ftp_no_source_file'] = 'Não foi possível localizar o arquivo de origem. Por favor verifique seu caminho.';
-$lang['ftp_unable_to_rename'] = 'Não foi possível renomear o arquivo.';
-$lang['ftp_unable_to_delete'] = 'Não foi possível remover o arquivo.';
-$lang['ftp_unable_to_move'] = 'Não foi possível mover o arquivo. Por favor tenha certeza que o diretório destino existe.';
+$lang['ftp_no_connection']       = 'Incapaz de localizar um ID de ligação válido. Por favor certifique-se que está ligado antes de efetuar quaisquer rotinas de ficheiro.';
+$lang['ftp_unable_to_connect']   = 'Incapaz de ligar ao seu servidor FTP com o hostname fornecido.';
+$lang['ftp_unable_to_login']     = 'Incapaz de fazer o login no seu servidor FTP.Por favor confira o seu username e password.';
+$lang['ftp_unable_to_mkdir']     = 'Incapaz de criar a diretoria que especificou.';
+$lang['ftp_unable_to_changedir'] = 'Incapaz de mudar de diretorias.';
+$lang['ftp_unable_to_chmod']     = 'Incapaz de definir as permissões do ficheiro. Por favor confira o caminho do ficheiro.';
+$lang['ftp_unable_to_upload']    = 'Incapaz de fazer o upload do ficheiro especificado. Por favor confira o caminho do ficheiro.';
+$lang['ftp_unable_to_download']  = 'Incapaz de fazer o download do ficheiro especificado. Por favor confira o caminho do ficheiro.';
+$lang['ftp_no_source_file']      = 'Incapaz de localizar o ficheiro de origem. Por favor confira o caminho do ficheiro.';
+$lang['ftp_unable_to_rename']    = 'Incapaz de mudar o nome ao ficheiro.';
+$lang['ftp_unable_to_delete']    = 'Incapaz de apagar o ficheiro.';
+$lang['ftp_unable_to_move']      = 'Incapaz de mover o ficheiro. Por favor certifique-se que a diretoria de destino existe..';

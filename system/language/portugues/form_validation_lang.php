@@ -1,28 +1,36 @@
 <?php
 
-$lang['required']			= "Preencha o campo '%s'";
-$lang['isset']				= "O %s campo deve conter um valor.";
-$lang['valid_email']                    = "%s inválido.";
-$lang['valid_emails']                   = "The %s field must contain all valid email addresses.";
-$lang['valid_url']			= "The %s field must contain a valid URL.";
-$lang['valid_ip']			= "The %s field must contain a valid IP.";
-$lang['min_length']			= "O campo '%s' deve conter no mínimo %s caracteres.";
-$lang['max_length']			= "O campo '%s' deve conter no máximo %s caracteres.";
-$lang['exact_length']                   = "The %s field must be exactly %s characters in length.";
-$lang['alpha']				= "The %s field may only contain alphabetical characters.";
-$lang['alpha_numeric']                  = "O campo '%s' deve conter apenas letras ou números.";
-$lang['alpha_dash']			= "The %s field may only contain alpha-numeric characters, underscores, and dashes.";
-$lang['numeric']			= "O campo '%s' deve conter apenas números.";
-$lang['is_numeric']			= "The %s field must contain only numeric characters.";
-$lang['integer']			= "O campo '%s' deve conter um valor inteiro.";
-$lang['regex_match']                    = "The %s field is not in the correct format.";
-$lang['matches']			= "The %s field does not match the %s field.";
-$lang['is_unique'] 			= "The %s field must contain a unique value.";
-$lang['is_natural']			= "The %s field must contain only positive numbers.";
-$lang['is_natural_no_zero']             = "The %s field must contain a number greater than zero.";
-$lang['decimal']			= "The %s field must contain a decimal number.";
-$lang['less_than']			= "The %s field must contain a number less than %s.";
-$lang['greater_than']                   = "The %s field must contain a number greater than %s.";
+$lang['form_validation_required']               = 'O campo {field} é obrigatório.';
+$lang['form_validation_isset']                  = 'O campo {field} deve conter um valor.';
+$lang['form_validation_valid_email']            = 'O campo {field} deve conter um email válido.';
+$lang['form_validation_valid_emails']           = 'O campo {field} deve conter todos os emails válidos.';
+$lang['form_validation_valid_url']              = 'O campo {field} deve conter um URL válido.';
+$lang['form_validation_valid_ip']               = 'O campo {field} deve conter um IP válido.';
+$lang['form_validation_valid_mac']              = 'O campo {field} deve conter um endereço MAC válido.';
+$lang['form_validation_valid_base64']			= 'O campo {field} deve conter uma string Base64 válida.';
+$lang['form_validation_min_length']             = 'O campo {field} deve conter pelo menos {param} caracteres.';
+$lang['form_validation_max_length']             = 'O campo {field} não pode conter mais que {param} caracteres.';
+$lang['form_validation_exact_length']           = 'O campo {field} deve conter exatamente {param} caracteres.';
+$lang['form_validation_alpha']                  = 'O campo {field} só pode conter caracteres do alfabeto.';
+$lang['form_validation_alpha_numeric']          = 'O campo {field} só pode conter caracteres alfanuméricos.';
+$lang['form_validation_alpha_numeric_spaces']   = 'O campo {field} só pode conter caracteres alfanuméricos e espaços.';
+$lang['form_validation_alpha_dash']             = 'O campo {field} só pode conter caracteres alfanuméricos, underscores (_) e hífenes (-).';
+$lang['form_validation_numeric']                = 'O campo {field} só pode conter números.';
+$lang['form_validation_is_numeric']             = 'O campo {field} só pode conter caracteres numéricos.';
+$lang['form_validation_integer']                = 'O campo {field} só pode conter um número inteiro.';
+$lang['form_validation_regex_match']            = 'O campo {field} não está no formato correcto.';
+$lang['form_validation_matches']                = 'O campo {field} não coincide com o campo {param}.';
+$lang['form_validation_differs']                = 'O campo {field} deve ser diferente do campo {param}.';
+$lang['form_validation_is_unique']              = 'O campo {field} deve conter um valor único.';
+$lang['form_validation_is_natural']             = 'O campo {field} deve conter um número natural.';
+$lang['form_validation_is_natural_no_zero']     = 'O campo {field} deve conter um número inteiro positivo maior que zero.';
+$lang['form_validation_decimal']                = 'O campo {field} deve conter um número decimal.';
+$lang['form_validation_less_than']              = 'O campo {field} deve conter um número menor que {param}.';
+$lang['form_validation_less_than_equal_to']     = 'O campo {field} deve conter um número menor ou igual que {param}.';
+$lang['form_validation_greater_than']           = 'O campo {field} deve conter um número maior que {param}.';
+$lang['form_validation_greater_than_equal_to']  = 'O campo {field} deve conter um número maior ou igual que {param}.';
+$lang['form_validation_error_message_not_set']  = 'Não existe uma mensagem de erro para o campo {field}.';
+$lang['form_validation_in_list']                = 'O campo {field} deve conter um dos valores: {param}.';
 
 
 /* End of file form_validation_lang.php */

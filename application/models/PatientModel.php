@@ -17,13 +17,13 @@ class PatientModel extends CI_Model {
       $this->db->where('id',$id);
     }
     if($full_name != null){
-      $this->db->where('full_name',$full_name);
+      $this->db->where('full_name LIKE','%'.$full_name.'%');
     }
     if($cns != null){
-      $this->db->where('cns',$cns);
+      $this->db->where('cns LIKE','%'.$cns.'%');
     }
     if($cpf != null){
-      $this->db->where('cpf',$cpf);
+      $this->db->where('cpf LIKE','%'.$cpf.'%');
     }
     if($birthday != null){
       $this->db->where('birthday',$birthday);

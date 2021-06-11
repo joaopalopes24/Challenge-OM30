@@ -25,26 +25,27 @@
           <div class="modal-body">
             <div class="form-group">
               <label for="full_name" class="col-form-label">Nome do Paciente</label>
-              <input type="search" class="form-control" id="full_name" name="full_name">
+              <input type="search" class="form-control" id="full_name" name="full_name" value="<?= $full_name ?>">
             </div>
             <div class="form-group">
               <label for="cns" class="col-form-label">CNS</label>
-              <input type="search" class="form-control" id="cns" name="cns" data-mask="000 0000 0000 0000">
+              <input type="search" class="form-control" id="cns" name="cns" data-mask="000 0000 0000 0000" value="<?= $cns ?>">
             </div>
             <div class="row">
               <div class="form-group col-6">
                 <label for="cpf" class="col-form-label">CPF</label>
-                <input type="search" class="form-control" id="cpf" name="cpf" data-mask="000.000.000-00">
+                <input type="search" class="form-control" id="cpf" name="cpf" data-mask="000.000.000-00" value="<?= $cpf ?>">
               </div>
               <div class="form-group col-6">
                 <label for="birthday" class="col-form-label">Data de Nascimento</label>
-                <input type="date" class="form-control" id="birthday" name="birthday">
+                <input type="date" class="form-control" id="birthday" name="birthday" value="<?= $birthday ?>">
               </div>
             </div>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-            <button type="submit" class="btn btn-primary">Pesquisar</button>
+            <button type="button" class="btn btn-outline-danger" onclick="ClearFields();">Limpar Campos</button>
+            <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Fechar</button>
+            <button type="submit" class="btn btn-outline-primary">Pesquisar</button>
           </div>
         </form>
       </div>
@@ -111,3 +112,12 @@
     </div>
   </div>
 </main>
+
+<script>
+function ClearFields() {
+  document.getElementById("full_name").value = "";
+  document.getElementById("cns").value = "";
+  document.getElementById("cpf").value = "";
+  document.getElementById("bithday").value = "";
+}
+</script>

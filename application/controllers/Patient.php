@@ -16,16 +16,23 @@ class Patient extends CI_Controller {
 
     if (!$this->input->post()) {
 
+      $values = [
+        'full_name' => '',
+        'cns' => '',
+        'cpf' => '',
+        'birthday' => '',
+      ];
+
       $values['patients'] = $this->patients->read()->result();
 
       template('patient/index', $values);
 
     } else {
 
-      $full_name = $this->input->post('full_name');
-      $cns = $this->input->post('cns');
-      $cpf = $this->input->post('cpf');
-      $birthday = $this->input->post('birthday');
+      $values['full_name'] = $full_name = $this->input->post('full_name');
+      $values['cns'] = $cns = $this->input->post('cns');
+      $values['cpf'] = $cpf = $this->input->post('cpf');
+      $values['birthday'] = $birthday = $this->input->post('birthday');
 
       $values['patients'] = $this->patients->read(null,true,$full_name,$cns,$cpf,$birthday)->result();
 
@@ -94,7 +101,7 @@ class Patient extends CI_Controller {
       $this->session->set_flashdata([
         'error' => $this->form_validation->error_array(),
       ]);
-
+      
       redirect("patient/edit/$id");
 
     } else {
