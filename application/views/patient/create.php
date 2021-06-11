@@ -7,7 +7,7 @@
     <div class="collapse navbar-collapse" id="navbarCollapse">
       <ul class="navbar-nav mr-auto">
       </ul>
-      <a href="#" class="btn btn-outline-primary my-2 my-sm-0 mr-sm-2" type="submit"><i class="fas fa-plus"></i> Adicionar Foto</a>
+      <button type="button" class="btn btn-outline-primary my-2 my-sm-0 mr-sm-2" data-toggle="modal" data-target="#modalPhoto"><i class="fas fa-plus"></i> Adicionar Foto</button>
     </div>
   </nav>
 </header>
@@ -19,7 +19,38 @@
 
       <?= getAlerts(); ?>
 
-      <form class="needs-validation" action="<?= base_url('patient/store') ?>" method="post" novalidate>
+      <form class="needs-validation" action="<?= base_url('patient/store') ?>" method="post" enctype="multipart/form-data" novalidate>
+        <!-- Modal de Adicionar Foto -->
+        <div class="modal fade" id="modalPhoto" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="modalLabel">Adicionar Foto</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <div class="form-group">
+                  <img id="previewImg" class="bd-placeholder-img card-img-top mb-3" alt="Foto de Perfil do Usuário">
+                  <label for="photo"><b>Foto de Perfil (tamanho máximo 12MB)</b></label>
+                  <input class="form-control-file" id="photo" type="file" name="photo" onchange="previewFile(this);">
+                  <?= feedback(false) ?>
+                </div>
+                <div class="form-group">
+                  <div class="custom-control custom-checkbox">
+                    <input class="custom-control-input" type="checkbox" id="not_photo" name="not_photo" onclick="notPhoto()">
+                    <label for="not_photo" class="custom-control-label">Sem Foto</label>
+                  </div>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Fechar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- FIM --- Modal de Adicionar Foto -->
         <div class="row">
           <div class="col-md-5 mb-1">
             <label for="full_name">Nome Completo</label>
@@ -105,3 +136,27 @@
   </div>
   </div>
 </main>
+
+<script>
+  function notPhoto() {
+    var not_photo = document.getElementsByName('not_photo')
+    var photo = document.getElementById('photo')
+    if (not_photo.item(0).checked == true) {
+      photo.disabled = true
+    } else {
+      photo.disabled = false
+    }
+  }
+  
+  function previewFile(input){
+    var file = $("input[type=file]").get(0).files[0];
+
+    if(file){
+      var reader = new FileReader();
+      reader.onload = function(){
+        $("#previewImg").attr("src", reader.result);
+      }
+      reader.readAsDataURL(file);
+    }
+  }
+</script>

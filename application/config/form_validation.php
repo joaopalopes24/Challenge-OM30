@@ -11,7 +11,7 @@
 
     'patient' => array(
       array('field' => 'id','label' => 'ID','rules' => 'trim|is_natural_no_zero'),
-      /*array('field' => 'photo','label' => 'Foto','rules' => 'required'),*/
+      array('field' => 'not_photo','label' => 'Foto','rules' => ''),
       array('field' => 'full_name','label' => 'Nome Completo','rules' => 'required|trim|validate_full_name'),
       array('field' => 'mother_name','label' => 'Nome da Mãe','rules' => 'required|trim|validate_full_name'),
       array('field' => 'birthday','label' => 'Data de Nascimento','rules' => 'required|trim'),

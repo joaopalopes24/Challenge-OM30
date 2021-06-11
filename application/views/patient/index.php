@@ -11,7 +11,7 @@
       <button type="button" class="btn btn-outline-primary mr-sm-2" data-toggle="modal" data-target="#modalSearch"><i class="fas fa-search"></i></button>
     </div>
   </nav>
-  <!-- Modal de Exclusão de Pacientes -->
+  <!-- Modal de Pesquisar Pacientes -->
   <div class="modal fade" id="modalSearch" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -51,7 +51,7 @@
       </div>
     </div>
   </div>
-  <!-- FIM --- Modal de Exclusão de Pacientes -->
+  <!-- FIM --- Modal de Pesquisar Pacientes -->
 </header>
 <main role="main" class="flex-shrink-0">
   <div class="container">

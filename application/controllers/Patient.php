@@ -34,7 +34,7 @@ class Patient extends CI_Controller {
       $values['cpf'] = $cpf = $this->input->post('cpf');
       $values['birthday'] = $birthday = $this->input->post('birthday');
 
-      $values['patients'] = $this->patients->read(null,true,$full_name,$cns,$cpf,$birthday)->result();
+      $values['patients'] = $this->patients->read(null,false,$full_name,$cns,$cpf,$birthday)->result();
 
       template('patient/index', $values);
     }
@@ -58,7 +58,10 @@ class Patient extends CI_Controller {
 
     } else {
 
+      array_key_exists('not_photo',$this->input->post()) ? $photo = NULL : $photo = $this->do_upload(NULL,$_FILES['photo']);
+
       $values = [
+        'photo' => $photo,
         'full_name' => $this->input->post('full_name'),
         'mother_name' => $this->input->post('mother_name'),
         'birthday' => $this->input->post('birthday'),
@@ -89,7 +92,7 @@ class Patient extends CI_Controller {
 
   public function edit($id) {
 
-    $values['patient'] = $this->patients->read($id,true)->row();
+    $values['patient'] = $this->patients->read($id,false)->row();
 
     template('patient/edit', $values);
   }
@@ -106,8 +109,11 @@ class Patient extends CI_Controller {
 
     } else {
 
+      array_key_exists('not_photo',$this->input->post()) ? $photo = $this->delete_file($id) : $photo = $this->do_upload($id,$_FILES['photo']);
+      
       $values = [
         'id' => $this->input->post('id'),
+        'photo' => $photo,
         'full_name' => $this->input->post('full_name'),
         'mother_name' => $this->input->post('mother_name'),
         'birthday' => $this->input->post('birthday'),
@@ -161,6 +167,53 @@ class Patient extends CI_Controller {
 
       redirect("patient");
     }
+  }
+
+  private function do_upload($id,$photo)
+  {
+    if($photo['name'] != ''){
+      date_default_timezone_set('America/Sao_Paulo');
+
+      $config['upload_path'] = './uploads/patient';
+      $config['allowed_types'] = 'jpeg|jpg|png';
+      $config['file_name'] = date("d-m-Y")."_".time();
+      $config['max_size'] = 12000;
+
+      $this->load->library('upload',$config);
+
+      if(!$this->upload->do_upload('photo')){
+        $this->session->set_flashdata([
+          'warning' => $this->upload->display_errors('',''),
+        ]);
+
+        return NULL;
+      }else{
+        if($id != NULL) $this->delete_file($id);
+
+        $data = array('upload_data' => $this->upload->data());
+
+        return $data['upload_data']['file_name'];
+      }
+    }
+
+    if($id != NULL){
+      $photo = $this->patients->read($id,false)->row()->photo;
+
+      return $photo;
+    }
+
+    return NULL;
+  }
+
+  private function delete_file($id)
+  {
+    $photo = $this->patients->read($id,false)->row()->photo;
+
+    $path = $_SERVER['DOCUMENT_ROOT'].'uploads/patient/'.$photo;
+
+    if(is_readable($path) && $photo != NULL) unlink($path);
+
+    return NULL;
   }
 
 }
