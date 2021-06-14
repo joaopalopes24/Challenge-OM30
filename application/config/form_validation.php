@@ -14,7 +14,7 @@
       array('field' => 'not_photo','label' => 'Foto','rules' => ''),
       array('field' => 'full_name','label' => 'Nome Completo','rules' => 'required|trim|validate_full_name'),
       array('field' => 'mother_name','label' => 'Nome da Mãe','rules' => 'required|trim|validate_full_name'),
-      array('field' => 'birthday','label' => 'Data de Nascimento','rules' => 'required|trim'),
+      array('field' => 'birthday','label' => 'Data de Nascimento','rules' => 'required|trim|validate_birthday'),
       array('field' => 'cpf','label' => 'CPF','rules' => 'required|trim|exact_length[14]|validate_cpf|validate_format_cpf|unique[patients.cpf]'),
       array('field' => 'cns','label' => 'CNS','rules' => 'required|trim|exact_length[18]|validate_cns|validate_format_cns|unique[patients.cns]'),
       array('field' => 'cep','label' => 'CEP','rules' => 'required|trim|exact_length[9]|validate_format_cep'),

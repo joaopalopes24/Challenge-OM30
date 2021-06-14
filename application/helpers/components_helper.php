@@ -54,44 +54,7 @@ function select_state_abbr($value = '') {
   return $msg;
 }
 
-// Captando as messagens de alerta na sessão
-
-function getAlertSuccess() {
-  
-  $CI = &get_instance();
-
-  $success = $CI->session->userdata('success');
-
-  if($success == NULL) return NULL;
-
-  return $success;
-}
-
-function getAlertDanger() {
-
-  $CI = &get_instance(); $msg = '';
-
-  $errors = $CI->session->userdata('error');
-
-  if($errors == NULL) return NULL;
-
-  foreach($CI->session->userdata('error') as $error){
-    $msg = $msg.$error.'<br>';
-  }
-
-  return $msg;
-}
-
-function getAlertWarning() {
-
-  $CI = &get_instance();
-
-  $warning = $CI->session->userdata('warning');
-
-  if($warning == NULL) return NULL;
-
-  return $warning;
-}
+// Printando as messagens de alerta da sessão na tela
 
 function getAlerts() {
 

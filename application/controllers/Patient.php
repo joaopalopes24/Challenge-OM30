@@ -7,8 +7,6 @@ class Patient extends CI_Controller {
   public function __construct() {
     // Call the Controller constructor
     parent::__construct();
-    $this->load->library('form_validation');
-    $this->load->library('session');
     $this->load->model('PatientModel', 'patients');
   }
 
@@ -22,8 +20,8 @@ class Patient extends CI_Controller {
         'cpf' => '',
         'birthday' => '',
       ];
-
-      $values['patients'] = $this->patients->read()->result();
+      $result = $this->patients->read();
+      $values['patients'] = $this->pagination($result);
 
       template('patient/index', $values);
 
@@ -34,8 +32,14 @@ class Patient extends CI_Controller {
       $values['cpf'] = $cpf = $this->input->post('cpf');
       $values['birthday'] = $birthday = $this->input->post('birthday');
 
-      $values['patients'] = $this->patients->read(null,false,$full_name,$cns,$cpf,$birthday)->result();
-
+      $result = $this->patients->read(null,false,$full_name,$cns,$cpf,$birthday);
+      
+      if($full_name == '' && $cpf == '' && $cns == '' && $birthday == ''){
+        $values['patients'] = $this->pagination($result);
+      }else{
+        $values['patients'] = $result->result();
+      }
+      
       template('patient/index', $values);
     }
 
@@ -43,18 +47,15 @@ class Patient extends CI_Controller {
 
   public function create() {
 
-    template('patient/create');
-  }
-
-  public function store() {
-
     if (!$this->form_validation->run('patient')) {
+
+      $values = $this->input->post();
 
       $this->session->set_flashdata([
         'error' => $this->form_validation->error_array(),
       ]);
 
-      redirect("patient/create");
+      template("patient/create",$values);
 
     } else {
 
@@ -92,20 +93,16 @@ class Patient extends CI_Controller {
 
   public function edit($id) {
 
-    $values['patient'] = $this->patients->read($id,false)->row();
-
-    template('patient/edit', $values);
-  }
-
-  public function update($id) {
-
     if (!$this->form_validation->run('patient')) {
+
+      $values = $this->input->post();
+      $values['patient'] = $this->patients->read($id,false)->row();
 
       $this->session->set_flashdata([
         'error' => $this->form_validation->error_array(),
       ]);
       
-      redirect("patient/edit/$id");
+      template("patient/edit", $values);
 
     } else {
 
@@ -142,7 +139,7 @@ class Patient extends CI_Controller {
     }
   }
 
-  public function destroy() {
+  public function delete() {
     
     if (!$this->form_validation->run('delete')) {
 
@@ -214,6 +211,26 @@ class Patient extends CI_Controller {
     if(is_readable($path) && $photo != NULL) unlink($path);
 
     return NULL;
+  }
+
+  private function pagination($values)
+  {
+    $this->load->library('Pagination_bootstrap');
+
+    $links = [
+      'next' => 'Próximo',
+      'prev' => 'Anterior',
+      'last' => 'Último',
+      'first' => 'Primeiro',
+    ];
+
+    $this->pagination_bootstrap->set_links($links);
+
+    $this->pagination_bootstrap->offset(6);
+
+    $results = $this->pagination_bootstrap->config("/patient/index", $values);
+
+    return $results;
   }
 
 }

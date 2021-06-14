@@ -4,7 +4,7 @@
 ?>
 <footer class="footer mt-auto py-3">
   <div class="container">
-    <p class="float-right"><a href="#">Back to top</a></p>
+    <p class="float-right"></p>
     <strong>Copyright &copy; <?php echo "$date" ?> -
       <a href="https://github.com/joaopalopes24/Desafio-OM30" target="_blank">
         João Pedro Lopes.

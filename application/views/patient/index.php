@@ -1,14 +1,16 @@
 <header>
-  <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-    <a class="navbar-brand" href="<?= base_url() ?>" style="margin-left: 10px;">Desafio OM30</a>
+  <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-info">
+    <a class="navbar-brand" href="<?= base_url() ?>" style="margin-left: 10px;">
+    <img style="object-fit:contain;" height="50px" src="<?= base_url("assets/images/logo.png") ?>">
+    </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarCollapse">
       <ul class="navbar-nav mr-auto">
       </ul>
-      <a href="<?= base_url('patient/create') ?>" class="btn btn-outline-success my-2 my-sm-0 mr-sm-2" type="submit"><i class="fas fa-plus"></i> Adicionar Paciente</a>
-      <button type="button" class="btn btn-outline-primary mr-sm-2" data-toggle="modal" data-target="#modalSearch"><i class="fas fa-search"></i></button>
+      <a href="<?= base_url('patient/create') ?>" class="btn btn-success my-2 my-sm-0 mr-sm-2" type="submit"><i class="fas fa-plus"></i> Adicionar Paciente</a>
+      <button type="button" class="btn btn-light mr-sm-2" data-toggle="modal" data-target="#modalSearch"><i class="fas fa-search"></i></button>
     </div>
   </nav>
   <!-- Modal de Pesquisar Pacientes -->
@@ -43,9 +45,9 @@
             </div>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-outline-danger" onclick="ClearFields();">Limpar Campos</button>
-            <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Fechar</button>
-            <button type="submit" class="btn btn-outline-primary">Pesquisar</button>
+            <button type="button" class="btn btn-danger" onclick="ClearFields();">Limpar Campos</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+            <button type="submit" class="btn btn-primary">Pesquisar</button>
           </div>
         </form>
       </div>
@@ -55,29 +57,29 @@
 </header>
 <main role="main" class="flex-shrink-0">
   <div class="container">
-
-    <?= getAlerts(); ?>
-
-    <div class="row">
+    <div class="row mt-5">
+      <div class="col-12">
+        <?= getAlerts(); ?>
+      </div>
       <?php //var_dump($patients); ?>
       <?php foreach($patients as $patient){?>
-      <div class="col-md-4">
-        <div class="card mb-4 shadow-sm">
+      <div class="col-md-6">
+        <div class="card mb-4 shadow-sm" style="height:290px;">
           <div class="card-body">
             <p class="card-text">
-              <b>Nome: </b> <?=$patient->full_name?><br>
-              <b>Nome da Mãe: </b> <?=$patient->mother_name?><br>
-              <b>CPF: </b> <?=$patient->cpf?><br>
-              <b>CNS: </b> <?=$patient->cns?><br>
-              <b>CEP: </b> <?=$patient->cep?><br>
+              <b>Nome: </b><?=$patient->full_name?><br>
+              <b>Nome da Mãe: </b><?=$patient->mother_name?><br>
+              <b>CPF: </b><?=$patient->cpf?><br>
+              <b>CNS: </b><?=$patient->cns?><br>
+              <b>CEP: </b><?=$patient->cep?><br>
               <?php $address = $patient->address.' '.$patient->number.' '.$patient->complement.' - '.$patient->district.', '.$patient->city.' - '.$patient->state_abbr ?>
-              <b>Endereço: </b> <?=$address?><br>
-              <b>Localização: </b> <?=$patient->localization?><br>
-              <b>Data de Nascimento: </b> <?=$patient->birthday?>
+              <b>Endereço: </b><?=$address?><br>
+              <!--<b>Localização: </b><?=$patient->localization?><br>-->
+              <b>Data de Nascimento: </b><?=dateFormat($patient->birthday)?>
             </p>
             <div class="d-flex justify-content-between align-items-center">
               <div class="btn-group">
-                <a href="<?= base_url("patient/edit/$patient->id") ?>" class="btn btn-sm btn-outline-primary"><i class="fas fa-pencil-alt"></i> Editar</a>
+                <a href="<?= base_url("patient/edit/$patient->id") ?>" class="btn btn-sm btn-outline-info"><i class="fas fa-pencil-alt"></i> Editar</a>
                 <button type="button" class="btn btn-sm btn-outline-danger" data-toggle="modal" data-target="#modalDelete<?=$patient->id?>"><i class="fas fa-trash-alt"></i> Excluir</button>
               </div>
             </div>
@@ -99,7 +101,7 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-              <form method="post" action="<?= base_url("patient/destroy") ?>" novalidate>
+              <form method="post" action="<?= base_url("patient/delete") ?>" novalidate>
                 <input value="<?=$patient->id?>" name="id" type="hidden">
                 <button type="submit" class="btn btn-danger">Excluir</button>
               </form>
@@ -108,6 +110,11 @@
         </div>
       </div>
       <!-- FIM --- Modal de Exclusão de Pacientes -->
+      <?php } ?>
+      <?php if($full_name == '' && $cpf == '' && $cns == '' && $birthday == ''){ ?>
+        <div class="col-12">
+          <?= $this->pagination_bootstrap->render() ?>
+        </div>
       <?php } ?>
     </div>
   </div>
@@ -118,6 +125,6 @@ function ClearFields() {
   document.getElementById("full_name").value = "";
   document.getElementById("cns").value = "";
   document.getElementById("cpf").value = "";
-  document.getElementById("bithday").value = "";
+  document.getElementById("birthday").value = "";
 }
 </script>

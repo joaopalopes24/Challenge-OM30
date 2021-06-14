@@ -99,6 +99,24 @@ class MY_Form_validation extends CI_Form_validation {
     return count(explode(" ", $name)) > 1;
   }
 
+  public function validate_birthday($birthday)
+  {
+    $this->_CI->form_validation->set_message('validate_birthday', 'A %s informada não é válida.');
+
+    $dateCurrent = getData(false);
+
+    if($birthday > $dateCurrent) return false;
+
+    $date1 = date_create($dateCurrent);
+    $date2 = date_create($birthday);
+
+    $interval = date_diff($date1,$date2)->days;
+
+    if($interval > 47500) return false;
+
+    return true;
+  }
+
   private function weighted_sum_cns($value)
   {
     $soma = 0;
