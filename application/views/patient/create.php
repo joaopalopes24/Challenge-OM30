@@ -34,7 +34,7 @@
               </div>
               <div class="modal-body">
                 <div class="form-group">
-                  <img id="previewImg" src="<?= base_url("assets/images/user-profile.png") ?>" class="bd-placeholder-img card-img-top mb-3" alt="Foto de Perfil do Usuário">
+                  <img id="previewImg" src="<?= base_url("assets/images/user.jpeg") ?>" class="bd-placeholder-img card-img-top mb-3" alt="Foto de Perfil do Usuário">
                   <label for="photo"><b>Foto de Perfil (tamanho máximo 12MB)</b></label>
                   <input class="form-control-file" id="photo" type="file" name="photo" onchange="previewFile(this);">
                   <?= feedback(false) ?>
