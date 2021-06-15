@@ -17,7 +17,7 @@
   <div class="modal fade" id="modalSearch" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
-        <form class="needs-validation" method="post" action="<?= base_url() ?>" novalidate>
+        <form class="needs-validation" action="<?= base_url() ?>" novalidate>
           <div class="modal-header">
             <h5 class="modal-title" id="modalLabel">Pesquisar Paciente</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -111,7 +111,7 @@
       </div>
       <!-- FIM --- Modal de Exclusão de Pacientes -->
       <?php } ?>
-      <?php if($full_name == '' && $cpf == '' && $cns == '' && $birthday == ''){ ?>
+      <?php if($full_name == '' && $cpf == '' && $cns == '' && $birthday == '' && $patients != NULL){ ?>
         <div class="col-12">
           <?= $this->pagination_bootstrap->render() ?>
         </div>

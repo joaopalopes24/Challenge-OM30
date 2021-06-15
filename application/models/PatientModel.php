@@ -7,7 +7,7 @@ class PatientModel extends CI_Model {
       parent::__construct();
   }
   
-  public function read($id = null,$delete = null,$full_name = null,$cns = null,$cpf = null,$birthday = null){
+  public function read($id = null,$delete = null,$array = null){
       
     $this->db->select();
     
@@ -16,17 +16,17 @@ class PatientModel extends CI_Model {
     if($id != null){
       $this->db->where('id',$id);
     }
-    if($full_name != null){
-      $this->db->where('full_name LIKE','%'.$full_name.'%');
+    if($array['full_name'] != null){
+      $this->db->where('full_name LIKE','%'.$array['full_name'].'%');
     }
-    if($cns != null){
-      $this->db->where('cns LIKE','%'.$cns.'%');
+    if($array['cns'] != null){
+      $this->db->where('cns LIKE','%'.$array['cns'].'%');
     }
-    if($cpf != null){
-      $this->db->where('cpf LIKE','%'.$cpf.'%');
+    if($array['cpf'] != null){
+      $this->db->where('cpf LIKE','%'.$array['cpf'].'%');
     }
-    if($birthday != null){
-      $this->db->where('birthday',$birthday);
+    if($array['birthday'] != null){
+      $this->db->where('birthday',$array['birthday']);
     }
     if($delete == null){
       $this->db->where('deleted_at',NULL);  

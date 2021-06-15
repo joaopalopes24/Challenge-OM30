@@ -12,37 +12,22 @@ class Patient extends CI_Controller {
 
   public function index() {
 
-    if (!$this->input->post()) {
 
-      $values = [
-        'full_name' => '',
-        'cns' => '',
-        'cpf' => '',
-        'birthday' => '',
-      ];
-      $result = $this->patients->read();
-      $values['patients'] = $this->pagination($result);
-
-      template('patient/index', $values);
-
-    } else {
-
-      $values['full_name'] = $full_name = $this->input->post('full_name');
-      $values['cns'] = $cns = $this->input->post('cns');
-      $values['cpf'] = $cpf = $this->input->post('cpf');
-      $values['birthday'] = $birthday = $this->input->post('birthday');
-
-      $result = $this->patients->read(null,false,$full_name,$cns,$cpf,$birthday);
-      
-      if($full_name == '' && $cpf == '' && $cns == '' && $birthday == ''){
-        $values['patients'] = $this->pagination($result);
-      }else{
-        $values['patients'] = $result->result();
-      }
-      
-      template('patient/index', $values);
+    if(!$this->input->get()){
+      $values = ['full_name' => '','cns' => '','cpf' => '','birthday' => '',];
+    }else{
+      $values = $this->input->get();
     }
 
+    $result = $this->patients->read(null,false,$values);
+
+    if($values['full_name'] == '' && $values['cpf'] == '' && $values['cns'] == '' && $values['birthday'] == '' && $result->result() != NULL){
+      $values['patients'] = $this->pagination($result);
+    }else{
+      $values['patients'] = $result->result();
+    }
+
+    template('patient/index', $values);
   }
 
   public function create() {
@@ -166,8 +151,8 @@ class Patient extends CI_Controller {
     }
   }
 
-  private function do_upload($id,$photo)
-  {
+  private function do_upload($id,$photo) {
+
     if($photo['name'] != ''){
       date_default_timezone_set('America/Sao_Paulo');
 
@@ -202,8 +187,8 @@ class Patient extends CI_Controller {
     return NULL;
   }
 
-  private function delete_file($id)
-  {
+  private function delete_file($id) {
+
     $photo = $this->patients->read($id,false)->row()->photo;
 
     $path = $_SERVER['DOCUMENT_ROOT'].'uploads/patient/'.$photo;
@@ -213,8 +198,8 @@ class Patient extends CI_Controller {
     return NULL;
   }
 
-  private function pagination($values)
-  {
+  private function pagination($values) {
+    
     $this->load->library('Pagination_bootstrap');
 
     $links = [
