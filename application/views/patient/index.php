@@ -64,7 +64,7 @@
       <?php //var_dump($patients); ?>
       <?php foreach($patients as $patient){?>
       <div class="col-md-6">
-        <div class="card mb-4 shadow-sm" style="height:290px;">
+        <div class="card mb-4 shadow-sm">
           <div class="card-body">
             <p class="card-text">
               <b>Nome: </b><?=$patient->full_name?><br>
