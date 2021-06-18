@@ -11,7 +11,7 @@ function feedback($id, $invalid = TRUE, $valid = TRUE) {
     $msg = $msg.'<div id="feedback-'.$id.'" class="invalid-feedback">Campo Obrigatório!</div>';
   }
   if($valid){
-    $msg = $msg.'<div class="valid-feedback">Campo Preenchido!</div>';
+    $msg = $msg.'<div class="valid-feedback">OK!</div>';
   }
 
   return $msg;

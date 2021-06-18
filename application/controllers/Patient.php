@@ -19,13 +19,7 @@ class Patient extends CI_Controller {
       $values = $this->input->get();
     }
 
-    $result = $this->patients->read(null,false,$values);
-
-    if($values['full_name'] == '' && $values['cpf'] == '' && $values['cns'] == '' && $values['birthday'] == '' && $result->result() != NULL){
-      $values['patients'] = $this->pagination($result);
-    }else{
-      $values['patients'] = $result->result();
-    }
+    $values['patients'] = $this->patients->read(null,false,$values)->result();
 
     $this->template->load('patient/index',$values);
   }
@@ -68,7 +62,7 @@ class Patient extends CI_Controller {
       if($result){
         echo json_encode(['status' => true, 'msg' => 'Paciente cadastrado com sucesso!', 'redirect' => base_url('patient')]);
       }else{
-        echo json_encode(['status' => false, 'error' => 0, 'msg' => 'Erro ao cadastrar Paciente!']);
+        echo json_encode(['status' => false, 'error' => 0, 'msg' => 'Erro ao cadastrar Paciente!', 'redirect' => base_url('patient')]);
       }
     }
   }
@@ -77,10 +71,12 @@ class Patient extends CI_Controller {
 
     $values['patient'] = $this->patients->read($id,false)->row();
 
+    if($values['patient'] == NULL) redirect('patient');
+
     $this->template->load('patient/edit',$values);
   }
 
-  public function update($id) {
+  public function update() {
 
     if (!$this->form_validation->run('patient')) {
       
@@ -112,14 +108,10 @@ class Patient extends CI_Controller {
       $result = $this->patients->update($values);
 
       if($result){
-        //$this->session->set_flashdata(['success' => 'Paciente editado com sucesso!',]);
         echo json_encode(['status' => true, 'msg' => 'Paciente editado com sucesso!', 'redirect' => base_url('patient')]);
       }else{
-        //$this->session->set_flashdata(['warning' => 'Erro ao editar Paciente!',]);
-        echo json_encode(['status' => false, 'error' => 0, 'msg' => 'Erro ao editar Paciente!']);
+        echo json_encode(['status' => false, 'error' => 0, 'msg' => 'Erro ao editar Paciente!', 'redirect' => base_url('patient')]);
       }
-
-      redirect("patient");
     }
   }
 
@@ -127,11 +119,7 @@ class Patient extends CI_Controller {
     
     if (!$this->form_validation->run('delete')) {
 
-      $this->session->set_flashdata([
-        'error' => $this->form_validation->error_array(),
-      ]);
-
-      redirect("patient");
+      echo json_encode(['status' => false, 'error' => 0, 'msg' => 'Erro ao deletar Paciente!', 'redirect' => base_url('patient')]);
 
     } else {
 
@@ -141,12 +129,10 @@ class Patient extends CI_Controller {
       $result = $this->patients->delete($values);
 
       if($result){
-        $this->session->set_flashdata(['success' => 'Paciente deletado com sucesso!',]);
+        echo json_encode(['status' => true, 'msg' => 'Paciente deletado com sucesso!', 'redirect' => base_url('patient')]);
       }else{
-        $this->session->set_flashdata(['warning' => 'Erro ao deletar Paciente!',]);
+        echo json_encode(['status' => false, 'error' => 0, 'msg' => 'Erro ao deletar Paciente!', 'redirect' => base_url('patient')]);
       }
-
-      redirect("patient");
     }
   }
 
@@ -195,26 +181,6 @@ class Patient extends CI_Controller {
     if(is_readable($path) && $photo != NULL) unlink($path);
 
     return NULL;
-  }
-
-  private function pagination($values) {
-    
-    $this->load->library('Pagination_bootstrap');
-
-    $links = [
-      'next' => 'Próximo',
-      'prev' => 'Anterior',
-      'last' => 'Último',
-      'first' => 'Primeiro',
-    ];
-
-    $this->pagination_bootstrap->set_links($links);
-
-    $this->pagination_bootstrap->offset(6);
-
-    $results = $this->pagination_bootstrap->config("/patient/index", $values);
-
-    return $results;
   }
 
 }

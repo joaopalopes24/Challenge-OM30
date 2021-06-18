@@ -13,7 +13,7 @@ class MY_Form_validation extends CI_Form_validation {
 
   public function unique($value,$string)
   {
-    $this->_CI->form_validation->set_message('unique', 'O valor do campo já existe.');
+    $this->_CI->form_validation->set_message('unique', 'O valor do campo %s já existe.');
 
     $id = $this->CI->input->post('id');
 
@@ -34,14 +34,14 @@ class MY_Form_validation extends CI_Form_validation {
 
   public function validate_format_cpf($cpf)
   {
-    $this->_CI->form_validation->set_message('validate_format_cpf', 'O formato não é válido.');
+    $this->_CI->form_validation->set_message('validate_format_cpf', 'O formato do %s não é válido.');
 
     return preg_match('/^\d{3}\.\d{3}\.\d{3}-\d{2}$/', $cpf) > 0;
   }
 
   public function validate_cpf($cpf)
   {
-    $this->_CI->form_validation->set_message('validate_cpf', 'O campo informado não é válido.');
+    $this->_CI->form_validation->set_message('validate_cpf', 'O %s informado não é válido.');
 
     $cpf = $this->sanitize($cpf);
 
@@ -66,14 +66,14 @@ class MY_Form_validation extends CI_Form_validation {
 
   public function validate_format_cns($cns)
   {
-    $this->_CI->form_validation->set_message('validate_format_cns', 'O formato não é válido.');
+    $this->_CI->form_validation->set_message('validate_format_cns', 'O formato do %s não é válido.');
 
     return preg_match('/^\d{3}\ \d{4}\ \d{4}\ \d{4}$/', $cns) > 0;
   }
 
   public function validate_cns($cns)
   {
-    $this->_CI->form_validation->set_message('validate_cns', 'O campo informado não é válido.');
+    $this->_CI->form_validation->set_message('validate_cns', 'O %s informado não é válido.');
 
     $cns = $this->sanitize($cns);
 
@@ -87,21 +87,21 @@ class MY_Form_validation extends CI_Form_validation {
 
   public function validate_format_cep($cep)
   {
-    $this->_CI->form_validation->set_message('validate_format_cep', 'O formato não é válido.');
+    $this->_CI->form_validation->set_message('validate_format_cep', 'O formato do %s não é válido.');
 
     return preg_match('/^\d{5}-\d{3}$/', $cep) > 0;
   }
 
   public function validate_full_name($name)
   {
-    $this->_CI->form_validation->set_message('validate_full_name', 'O campo informado não contém sobrenome.');
+    $this->_CI->form_validation->set_message('validate_full_name', 'O %s informado não contém sobrenome.');
 
     return count(explode(" ", $name)) > 1;
   }
 
   public function validate_birthday($birthday)
   {
-    $this->_CI->form_validation->set_message('validate_birthday', 'O campo informado não é válido.');
+    $this->_CI->form_validation->set_message('validate_birthday', 'A %s não é válida.');
 
     $dateCurrent = getData(false);
 

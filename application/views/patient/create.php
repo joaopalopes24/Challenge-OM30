@@ -139,17 +139,13 @@
   </div>
 </main>
 
-<?= loagind() ?>
-
 <script>
   function notPhoto() {
-    var not_photo = document.getElementsByName('not_photo')
-    var photo = document.getElementById('photo')
-    if (not_photo.item(0).checked == true) {
-      photo.disabled = true;
+    if($('#not_photo').is(':checked')) {
+      $('#photo').prop('disabled',true);
       $("#previewImg").css("display","none");
     } else {
-      photo.disabled = false;
+      $('#photo').prop('disabled',false);
       $("#previewImg").css("display","block");
     }
   }
@@ -167,18 +163,32 @@
   }
 
   $('form').on('submit', async function(e){
-    openLoading();
     await axios.post('<?php echo base_url('patient/store') ?>',$(this).serialize())
       .then(function(response){
-        //openLoading();
         validateForm('#form-add-patient',response.data);
-        //closeLoading();
       })
       .catch(function(error){
         console.log(error);
       });
     e.preventDefault();
-    closeLoading();
     return false;
   })
+
+  function requestInput(name){
+    axios.post('<?= base_url("patient/store") ?>',$('#' + name).serialize())
+      .then(function(response){
+        validateInput(name,response.data.list_errors);
+      })
+      .catch(function(error){
+        console.log(error);
+      });
+  }
+
+  $(document).ready(function(){
+    $('form#form-add-patient :input').each(function(){
+      $(this).change(function(){
+        requestInput($(this).attr('id'));
+      });    
+    });
+  });
 </script>

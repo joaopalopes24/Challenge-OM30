@@ -21,7 +21,7 @@
 
       <?= getAlerts(); ?>
 
-      <form class="needs-validation" action="<?= base_url("patient/edit/$patient->id") ?>" method="post" enctype="multipart/form-data" novalidate>
+      <form id="form-edit-patient" class="needs-validation" method="post" enctype="multipart/form-data" onsubmit="return false" novalidate>
         <!-- Modal de Editar Foto -->
         <div class="modal fade" id="modalPhoto" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
           <div class="modal-dialog">
@@ -38,7 +38,7 @@
                   <img id="previewImg" src="<?= $url ?>" class="bd-placeholder-img card-img-top mb-3" alt="Foto de Perfil do Usuário">
                   <label for="photo"><b>Foto de Perfil (tamanho máximo 12MB)</b></label>
                   <input class="form-control-file" id="photo" type="file" name="photo" onchange="previewFile(this);">
-                  <?= feedback(false) ?>
+                  <?= feedback('photo',false) ?>
                 </div>
                 <div class="form-group">
                   <div class="custom-control custom-checkbox">
@@ -58,72 +58,72 @@
         <div class="row">
           <div class="col-md-5 mb-1">
             <label for="full_name">Nome Completo</label>
-            <input type="text" class="form-control" id="full_name" name="full_name" placeholder="Nome Completo" value="<?= isset($full_name) ? $full_name : $patient->full_name; ?>" required>
-            <?= feedback() ?>
+            <input type="text" class="form-control" id="full_name" name="full_name" placeholder="Nome Completo" value="<?=$patient->full_name?>" required>
+            <?= feedback('full_name') ?>
           </div>
           <div class="col-md-4 mb-1">
             <label for="mother_name">Nome da mãe</label>
-            <input type="text" class="form-control" id="mother_name" name="mother_name" placeholder="Nome da mãe" value="<?= isset($mother_name) ? $mother_name : $patient->mother_name; ?>" required>
-            <?= feedback() ?>
+            <input type="text" class="form-control" id="mother_name" name="mother_name" placeholder="Nome da mãe" value="<?=$patient->mother_name?>" required>
+            <?= feedback('mother_name') ?>
           </div>
           <div class="col-md-3 mb-1">
             <label for="birthday">Data de Nascimento</label>
-            <input type="date" class="form-control" id="birthday" name="birthday" value="<?= isset($birthday) ? $birthday : $patient->birthday; ?>" required>
-            <?= feedback() ?>
+            <input type="date" class="form-control" id="birthday" name="birthday" value="<?=$patient->birthday?>" required>
+            <?= feedback('birthday') ?>
           </div>
         </div>
         <div class="row">
           <div class="col-md-4 mb-1">
             <label for="cpf">CPF</label>
-            <input type="text" class="form-control" id="cpf" name="cpf" placeholder="SOMENTE NÚMEROS" data-mask="000.000.000-00" value="<?= isset($cpf) ? $cpf : $patient->cpf; ?>" required>
-            <?= feedback() ?>
+            <input type="text" class="form-control" id="cpf" name="cpf" placeholder="SOMENTE NÚMEROS" data-mask="000.000.000-00" value="<?=$patient->cpf?>" required>
+            <?= feedback('cpf') ?>
           </div>
           <div class="col-md-4 mb-1">
             <label for="cns">CNS</label>
-            <input type="text" class="form-control" id="cns" name="cns" placeholder="SOMENTE NÚMEROS" data-mask="000 0000 0000 0000" value="<?= isset($cns) ? $cns : $patient->cns; ?>" required>
-            <?= feedback() ?>
+            <input type="text" class="form-control" id="cns" name="cns" placeholder="SOMENTE NÚMEROS" data-mask="000 0000 0000 0000" value="<?=$patient->cns?>" required>
+            <?= feedback('cns') ?>
           </div>
           <div class="col-md-4 mb-1">
             <label for="cep">CEP</label>
-            <input type="text" class="form-control" id="cep" name="cep" placeholder="SOMENTE NÚMEROS" data-mask="00000-000" onblur="pesquisacep(this.value);" value="<?= isset($cep) ? $cep : $patient->cep; ?>" required>
-            <?= feedback() ?>
+            <input type="text" class="form-control" id="cep" name="cep" placeholder="SOMENTE NÚMEROS" data-mask="00000-000" onblur="pesquisacep(this.value);" value="<?=$patient->cep?>" required>
+            <?= feedback('cep') ?>
           </div>
         </div>
         <div class="row">
           <div class="col-md-5 mb-1">
             <label for="address">Rua / Avenida</label>
-            <input type="text" class="form-control" id="address" name="address" placeholder="Rua / Avenida" value="<?= isset($address) ? $address : $patient->address; ?>" required>
-            <?= feedback() ?>
+            <input type="text" class="form-control" id="address" name="address" placeholder="Rua / Avenida" value="<?=$patient->address?>" required>
+            <?= feedback('address') ?>
           </div>
           <div class="col-md-3 mb-1">
             <label for="number">Número</label>
-            <input type="number" class="form-control" id="number" name="number" placeholder="Número" value="<?= isset($number) ? $number : $patient->number; ?>" required>
-            <?= feedback() ?>
+            <input type="number" class="form-control" id="number" name="number" placeholder="Número" value="<?=$patient->number?>" required>
+            <?= feedback('number') ?>
           </div>
           <div class="col-md-4 mb-1">
             <label for="complement">Complemento</label>
-            <input type="text" class="form-control" id="complement" name="complement" placeholder="Complemento" value="<?= isset($complement) ? $complement : $patient->complement; ?>" >
-            <?= feedback(false) ?>
+            <input type="text" class="form-control" id="complement" name="complement" placeholder="Complemento" value="<?=$patient->complement?>" >
+            <?= feedback('complement',false) ?>
           </div>
         </div>
         <input value="<?=$patient->localization?>" name="localization" type="hidden">
         <div class="row">
           <div class="col-md-5 mb-1">
             <label for="district">Bairro</label>
-            <input type="text" class="form-control" id="district" name="district" placeholder="Bairro" value="<?= isset($district) ? $district : $patient->district; ?>" required>
-            <?= feedback() ?>
+            <input type="text" class="form-control" id="district" name="district" placeholder="Bairro" value="<?=$patient->district?>" required>
+            <?= feedback('district') ?>
           </div>
           <div class="col-md-5 mb-1">
             <label for="city">Cidade</label>
-            <input type="text" class="form-control" id="city" name="city" placeholder="Cidade" value="<?= isset($city) ? $city : $patient->city; ?>" required>
-            <?= feedback() ?>
+            <input type="text" class="form-control" id="city" name="city" placeholder="Cidade" value="<?=$patient->city?>" required>
+            <?= feedback('city') ?>
           </div>
           <div class="col-md-2 mb-1">
             <label for="state_abbr">Estado</label>
             <select class="custom-select d-block w-100" id="state_abbr" name="state_abbr" required>
-              <?= select_state_abbr(isset($state_abbr) ? $state_abbr : $patient->state_abbr) ?>
+              <?= select_state_abbr($patient->state_abbr) ?>
             </select>
-            <?= feedback() ?>
+            <?= feedback('state_abbr') ?>
           </div>
         </div>
         <hr class="mb-2">
@@ -143,13 +143,11 @@
 
 <script>
   function notPhoto() {
-    var not_photo = document.getElementsByName('not_photo')
-    var photo = document.getElementById('photo')
-    if (not_photo.item(0).checked == true) {
-      photo.disabled = true;
+    if($('#not_photo').is(':checked')) {
+      $('#photo').prop('disabled',true);
       $("#previewImg").css("display","none");
     } else {
-      photo.disabled = false;
+      $('#photo').prop('disabled',false);
       $("#previewImg").css("display","block");
     }
   }
@@ -165,4 +163,34 @@
       reader.readAsDataURL(file);
     }
   }
+
+  $('form').on('submit', async function(e){
+    await axios.post('<?= base_url("patient/update") ?>',$(this).serialize())
+      .then(function(response){
+        validateForm('#form-edit-patient',response.data);
+      })
+      .catch(function(error){
+        console.log(error);
+      });
+    e.preventDefault();
+    return false;
+  })
+
+  function requestInput(name){
+    axios.post('<?= base_url("patient/update") ?>',$('#' + name).serialize())
+      .then(function(response){
+        validateInput(name,response.data.list_errors);
+      })
+      .catch(function(error){
+        console.log(error);
+      });
+  }
+
+  $(document).ready(function(){
+    $('form#form-edit-patient :input').each(function(){
+      $(this).change(function(){
+        requestInput($(this).attr('id'))
+      });    
+    });
+  });
 </script>
