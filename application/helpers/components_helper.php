@@ -3,12 +3,12 @@
 // Componente criado com intuito de evitar a repetição das mensagens
 // de erro em todos os forms necessários
 
-function feedback($invalid = TRUE, $valid = TRUE) {
+function feedback($id, $invalid = TRUE, $valid = TRUE) {
 
   $msg = '';
 
   if($invalid){
-    $msg = $msg.'<div class="invalid-feedback">Campo Obrigatório!</div>';
+    $msg = $msg.'<div id="feedback-'.$id.'" class="invalid-feedback">Campo Obrigatório!</div>';
   }
   if($valid){
     $msg = $msg.'<div class="valid-feedback">OK!</div>';
@@ -87,6 +87,19 @@ function getAlerts() {
       </button>
     </div>';
   }
+
+  return $msg;
+}
+
+// Modal com Spinner para mostrar que está carregando
+
+function loagind() {
+
+  $msg = '<div class="modal" id="loading" data-backdrop="static"> 
+            <div class="spinner-border text-info loading" role="status">
+              <span class="sr-only">Loading...</span>
+            </div>
+          </div>';
 
   return $msg;
 }

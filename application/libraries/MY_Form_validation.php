@@ -34,7 +34,7 @@ class MY_Form_validation extends CI_Form_validation {
 
   public function validate_format_cpf($cpf)
   {
-    $this->_CI->form_validation->set_message('validate_format_cpf', 'O formato de %s não é válido.');
+    $this->_CI->form_validation->set_message('validate_format_cpf', 'O formato do %s não é válido.');
 
     return preg_match('/^\d{3}\.\d{3}\.\d{3}-\d{2}$/', $cpf) > 0;
   }
@@ -66,7 +66,7 @@ class MY_Form_validation extends CI_Form_validation {
 
   public function validate_format_cns($cns)
   {
-    $this->_CI->form_validation->set_message('validate_format_cns', 'O formato de %s não é válido.');
+    $this->_CI->form_validation->set_message('validate_format_cns', 'O formato do %s não é válido.');
 
     return preg_match('/^\d{3}\ \d{4}\ \d{4}\ \d{4}$/', $cns) > 0;
   }
@@ -87,7 +87,7 @@ class MY_Form_validation extends CI_Form_validation {
 
   public function validate_format_cep($cep)
   {
-    $this->_CI->form_validation->set_message('validate_format_cep', 'O formato de %s não é válido.');
+    $this->_CI->form_validation->set_message('validate_format_cep', 'O formato do %s não é válido.');
 
     return preg_match('/^\d{5}-\d{3}$/', $cep) > 0;
   }
@@ -101,7 +101,7 @@ class MY_Form_validation extends CI_Form_validation {
 
   public function validate_birthday($birthday)
   {
-    $this->_CI->form_validation->set_message('validate_birthday', 'A %s informada não é válida.');
+    $this->_CI->form_validation->set_message('validate_birthday', 'A %s não é válida.');
 
     $dateCurrent = getData(false);
 

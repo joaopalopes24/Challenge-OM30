@@ -64,7 +64,7 @@
       <?php //var_dump($patients); ?>
       <?php foreach($patients as $patient){?>
       <div class="col-md-6">
-        <div class="card mb-4 shadow-sm" style="height:290px;">
+        <div class="card mb-4 shadow-sm">
           <div class="card-body">
             <p class="card-text">
               <b>Nome: </b><?=$patient->full_name?><br>
@@ -101,7 +101,7 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-              <form method="post" action="<?= base_url("patient/delete") ?>" novalidate>
+              <form id="form-delete-patient" method="post" onsubmit="return false">
                 <input value="<?=$patient->id?>" name="id" type="hidden">
                 <button type="submit" class="btn btn-danger">Excluir</button>
               </form>
@@ -111,20 +111,27 @@
       </div>
       <!-- FIM --- Modal de Exclusão de Pacientes -->
       <?php } ?>
-      <?php if($full_name == '' && $cpf == '' && $cns == '' && $birthday == '' && $patients != NULL){ ?>
-        <div class="col-12">
-          <?= $this->pagination_bootstrap->render() ?>
-        </div>
-      <?php } ?>
     </div>
   </div>
 </main>
 
 <script>
-function ClearFields() {
-  document.getElementById("full_name").value = "";
-  document.getElementById("cns").value = "";
-  document.getElementById("cpf").value = "";
-  document.getElementById("birthday").value = "";
-}
+  function ClearFields() {
+    $('#full_name').val('');
+    $('#cns').val('');
+    $('#cpf').val('');
+    $('#birthday').val('');
+  }
+
+  $('form').on('submit', async function(e){
+    await axios.post('<?= base_url("patient/delete") ?>',$(this).serialize())
+      .then(function(response){
+        validateForm('#form-delete-patient',response.data);
+      })
+      .catch(function(error){
+        console.log(error);
+      });
+    e.preventDefault();
+    return false;
+  })
 </script>
